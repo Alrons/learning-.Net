@@ -8,6 +8,7 @@ namespace Projection_operations_LINQ
         static void Main(string[] args)
         {
             Lists lists = new Lists();
+            List<int> intList = lists.IntList;
             List<string> stringList = lists.StringList;
             Dictionary<int, string> intStringDictionary = lists.IntStringDictionary;
             List<List<string>> stringListInList = lists.StringListInList;
@@ -26,6 +27,20 @@ namespace Projection_operations_LINQ
             Show.Diference("Достаю вложенные списки делая один плоский список\n" +
                 " (было List<List<string>> стало List<string>)\n" +
                 "Со вторым списком еще дополнительно проецирую только 2 буквы", stringListInList.SelectMany(x => x).ToList(), stringListInList.SelectMany(x => x.Select(word => word.Substring(0,2))).ToList());
+
+            // пример с использованием zip
+            Console.WriteLine("----------------____________________---------------");
+            // int список с 7-ю элементами.
+            IEnumerable<int> numbers = [1, 2, 3, 4, 5, 6, 7];
+            // char список с 6-ю элементами.
+            IEnumerable<char> letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+            foreach ((int number, char letter) in numbers.Zip(letters))
+            {
+                Console.WriteLine($"Number: {number} объединяется с буквой: '{letter}'");
+            }
+
+
         }
     }
 }
